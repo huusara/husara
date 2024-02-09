@@ -1,0 +1,8 @@
+ptica-flappyBird
+zemlja-ground
+score-scoreText
+gornji stub:pipeTop
+donji stub:pipeBottom
+gejm timer:gameTimer + gameTimerEvent
+gamekeysiup
+gamekeysisdown

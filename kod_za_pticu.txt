@@ -1,0 +1,61 @@
+ public partial class MainForm : Form
+    {
+        int pipeSpeed = 8;
+        int gravity = 15;
+        int score = 0;
+
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
+        void gamekeyisdown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                gravity = -15;
+            }
+        }
+
+        void gamekeyisup(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                gravity = 15;
+            }
+        }
+
+        void gameTimerEvent(object sender, EventArgs e)
+        {
+            flappyBird.Top += gravity;
+            pipeBottom.Left -= pipeSpeed;
+            pipeTop.Left -= pipeSpeed;
+            scoreText.Text = "Score=  "+ score;
+
+            if (pipeBottom.Left < -170)
+            {
+                pipeBottom.Left = 750;
+                score++;
+            }
+
+            if (pipeTop.Left < -190)
+            {
+                pipeTop.Left = 700;
+                
+            }
+
+            if (flappyBird.Bounds.IntersectsWith(pipeBottom.Bounds) ||
+                flappyBird.Bounds.IntersectsWith(pipeTop.Bounds) ||
+                flappyBird.Bounds.IntersectsWith(ground.Bounds) || flappyBird.Top < -25)
+            {
+                endGame();
+            }
+        }
+
+        private void endGame()
+        {
+        	gameTImer.Stop();
+        	scoreText.Text += "   Game Over  ";
+        }
+    }
+}
